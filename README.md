@@ -8,8 +8,7 @@ BillyCoder is a Streamlit chat application that helps with code assistance. It a
 BillyCoder
 ├── src
 │ ├── app.py # Main entry point of the Streamlit application
-│ └── components
-│ └── chat.py # Contains the chat display function
+│ └── configs # Configuration files
 ├── requirements.txt # Lists the project dependencies
 └── README.md # Documentation for the project
 ```
