@@ -19,15 +19,7 @@ def get_messages() -> List[Dict[str, str]]:
     Returns:
         list: A list of conversation messages.
     """
-    if os.path.exists(os.path.join(TMP_DIR,'conversations.json')):
-        with open(os.path.join(TMP_DIR,'conversations.json'), 'r') as file:
-            try:
-                messages = json.load(file)
-            except json.JSONDecodeError:
-                messages = MESSAGES
-            return messages
-    else:
-        return MESSAGES
+    return MESSAGES
 
 def set_messages(messages: List[Dict[str, str]]):
     """
@@ -36,8 +28,7 @@ def set_messages(messages: List[Dict[str, str]]):
     Args:
         messages (list): A list of conversation messages.
     """
-    with open(os.path.join(TMP_DIR,'conversations.json'), 'w') as file:
-        json.dump(messages, file)
+    st.session_state.messages = messages
 
 def get_content(response) -> dict:
     """
@@ -85,8 +76,6 @@ def reset_daily_count():
         st.session_state.message_count = 0
 
 def clear_chat():
-    # Clear the conversations.json file and reinitialize messages in session state
-    open(os.path.join(TMP_DIR,'conversations.json'), 'w').close()  # Empty the file
     st.session_state.messages = get_messages()  # Reinitialize messages
 
 st.set_page_config(
