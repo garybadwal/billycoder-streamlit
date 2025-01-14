@@ -89,6 +89,12 @@ def clear_chat():
     open(os.path.join(TMP_DIR,'conversations.json'), 'w').close()  # Empty the file
     st.session_state.messages = get_messages()  # Reinitialize messages
 
+st.set_page_config(
+    page_title="BillyCoder",
+    page_icon=":office_worker::skin-tone-2:",
+    layout="centered",
+)
+
 st.title("BillyCoder")
 st.caption("Your AI code assistant.")
 
