@@ -91,7 +91,7 @@ def clear_chat():
 
 st.set_page_config(
     page_title="BillyCoder",
-    page_icon=":office_worker::skin-tone-2:",
+    page_icon=":office_worker:",
     layout="centered",
 )
 
