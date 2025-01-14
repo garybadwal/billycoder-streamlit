@@ -1,8 +1,4 @@
-from dotenv import load_dotenv
-import os
-
-# Load environment variables from .env file
-load_dotenv()
+import streamlit as st
 
 # Access environment variables
-HUGGING_FACE_TOKEN = os.getenv("HUGGING_FACE_TOKEN", "")
+HUGGING_FACE_TOKEN = st.secrets.get("HUGGING_FACE_TOKEN", "")
