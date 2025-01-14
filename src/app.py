@@ -8,8 +8,9 @@ import streamlit as st
 from huggingface_hub import InferenceClient
 
 from configs.constants import MESSAGES
-from configs.prompts import USER_PROMPT
 from configs.cred import HUGGING_FACE_TOKEN as TOKEN
+
+TMP_DIR = '/tmp'
 
 def get_messages() -> List[Dict[str, str]]:
     """
@@ -18,8 +19,8 @@ def get_messages() -> List[Dict[str, str]]:
     Returns:
         list: A list of conversation messages.
     """
-    if os.path.exists('conversations.json'):
-        with open('conversations.json', 'r') as file:
+    if os.path.exists(os.path.join(TMP_DIR,'conversations.json')):
+        with open(os.path.join(TMP_DIR,'conversations.json'), 'r') as file:
             try:
                 messages = json.load(file)
             except json.JSONDecodeError:
@@ -35,7 +36,7 @@ def set_messages(messages: List[Dict[str, str]]):
     Args:
         messages (list): A list of conversation messages.
     """
-    with open('conversations.json', 'w') as file:
+    with open(os.path.join(TMP_DIR,'conversations.json'), 'w') as file:
         json.dump(messages, file)
 
 def get_content(response) -> dict:
@@ -85,7 +86,7 @@ def reset_daily_count():
 
 def clear_chat():
     # Clear the conversations.json file and reinitialize messages in session state
-    open('conversations.json', 'w').close()  # Empty the file
+    open(os.path.join(TMP_DIR,'conversations.json'), 'w').close()  # Empty the file
     st.session_state.messages = get_messages()  # Reinitialize messages
 
 st.title("BillyCoder")
